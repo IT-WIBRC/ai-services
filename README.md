@@ -1,2 +1,2 @@
-# myChatGPTbot
-Create my own chat bot using ChatGPT API
+# ai-services
+Create website which provide some api functionalities in one place with some plus
