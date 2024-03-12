@@ -1,0 +1,6 @@
+{
+    "extends": ["@wibrc/eslint-config-vue"],
+    "rules": {
+        "sort-imports": "off"
+    }
+}

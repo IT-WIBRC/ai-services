@@ -1,0 +1,31 @@
+{
+  "name": "ai-services",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "prepare": "husky",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "precommit": "npm audit && npm run lint"
+  },
+  "dependencies": {
+    "openai": "^4.28.4",
+    "vue": "^3.4.21"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@wibrc/eslint-config-vue": "github:IT-WIBRC/eslint-config-vue",
+    "autoprefixer": "^10.4.18",
+    "eslint-vue-config": "github:IT-WIBRC/eslint-vue-config",
+    "husky": "^9.0.11",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.1.6",
+    "vite": "^5.1.6",
+    "vue-tsc": "^1.8.27"
+  }
+}
