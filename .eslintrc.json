@@ -1,6 +1,6 @@
 {
-    "extends": ["@wibrc/eslint-config-vue"],
-    "rules": {
-        "sort-imports": "off"
-    }
+  "extends": ["@gge/eslint-config-epsvue"],
+  "rules": {
+    "sort-imports": "off"
+  }
 }

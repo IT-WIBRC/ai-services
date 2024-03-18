@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black;
+  }
+}
+
+@layer utilities {
+  .scroll {
+    @apply overflow-x-hidden overscroll-y-auto;
+  }
+
+  .scroll::-webkit-scrollbar {
+    @apply w-1;
+  }
+
+  .scroll::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+}

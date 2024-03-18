@@ -1,7 +1,8 @@
 <template>
-  <div class="text-center font-semibold">here is the entry point</div>
+  <main class="h-screen">
+    <BotLayout class="h-full" />
+  </main>
 </template>
-
-<script setup lang="ts"></script>
-
-<style scoped></style>
+<script setup lang="ts">
+import BotLayout from "@/chatbot/views/BotLayout.vue";
+</script>
