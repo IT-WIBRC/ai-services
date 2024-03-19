@@ -1,5 +1,5 @@
 {
-  "extends": ["@gge/eslint-config-epsvue"],
+  "extends": ["eslint-config-epsvue"],
   "rules": {
     "sort-imports": "off"
   }

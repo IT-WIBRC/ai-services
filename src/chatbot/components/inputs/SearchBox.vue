@@ -1,6 +1,6 @@
 <template>
   <label class="relative block">
-    <span class="absolute inset-y-0 left-4 flex items-center border">
+    <span class="absolute inset-y-0 left-4 flex items-center">
       <SmileIcon class="w-7 h-7" />
     </span>
     <textarea
@@ -11,7 +11,7 @@
       @keyup.enter="emitTextToSearch"
       class="input-search"
     ></textarea>
-    <span class="absolute inset-y-0 right-0 pr-1.5 flex items-center border">
+    <span class="absolute inset-y-0 right-0 pr-1.5 flex items-center">
       <RoundedCursorIcon
         class="h-8 w-12 cursor-pointer"
         @click.stop="emitTextToSearch"
@@ -46,12 +46,12 @@ const emitTextToSearch = (): void => {
 .input-search {
   @apply font-normal text-base bg-transparent w-full h-full border-2 border-[#5F5F5F] text-white resize-none;
 
-  @apply rounded-xl py-4 px-14 outline-none placeholder:text-[#787676] transition duration-150 max-h-14;
+  @apply rounded-xl py-4 px-14 outline-none placeholder:text-[#787676] transition duration-150;
 
   @apply overflow-y-auto overflow-x-hidden scroll;
 }
 
 .input-search:focus {
-  @apply outline-none border-[#6693AC] ring-1 ring-[#6693AC];
+  @apply outline-none border-cyan-550 ring-1 ring-cyan-550;
 }
 </style>

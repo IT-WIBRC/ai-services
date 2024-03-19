@@ -4,7 +4,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        black: "#151515",
+        black: {
+          950: "#151515",
+          800: "#282828",
+        },
+        cyan: {
+          550: "#6693AC",
+        },
+      },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
       },
     },
   },

@@ -1,23 +1,21 @@
 <template>
-  <div class="flex">
-    <section class="w-1/4 bg-fuchsia-400 text-white">Menu</section>
-    <section class="w-3/4 flex flex-col justify-end mx-10 pb-4">
-      <div class="h-full space-y-5 scroll pl-2 pr-1.5 py-2">
-        <div
-          v-for="(search, index) in getUserSearches"
-          :key="index"
-          class="flex"
-          :class="{ 'justify-end': search.author === 'SYSTEM' }"
-        >
-          <MessageCard v-bind="search" class="max-w-[75%] shadow-sm" />
-        </div>
+  <section class="h-screen flex flex-col justify-end mx-10 pb-4">
+    <div class="h-full space-y-5 scroll pl-2 pr-1.5 py-2">
+      <div
+        v-for="(search, index) in getUserSearches"
+        :key="index"
+        class="flex"
+        :class="{ 'justify-end': search.author === 'SYSTEM' }"
+      >
+        <MessageCard v-bind="search" class="max-w-[75%] shadow-sm" />
       </div>
-      <SearchBox
-        placeholder="Ask question to WibrBot"
-        @textToSearch="makeSearch"
-      />
-    </section>
-  </div>
+    </div>
+    <SearchBox
+      placeholder="Ask question to WibrBot"
+      @textToSearch="makeSearch"
+      class="min-h-14"
+    />
+  </section>
 </template>
 <script setup lang="ts">
 import { computed, reactive } from "vue";
