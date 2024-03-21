@@ -1,5 +1,5 @@
 <template>
-  <label class="relative block border">
+  <label class="relative block" ref="label">
     <span class="absolute inset-y-0 left-4 flex items-center">
       <SmileIcon class="w-7 h-7" />
     </span>
@@ -8,7 +8,7 @@
       autocomplete="off"
       v-model="typedText"
       @keyup.enter="emitTextToSearch"
-      @keyup="($event) => textAreaAdjust($event)"
+      @keyup="textAreaAdjust()"
       class="input-search"
       ref="textArea"
     ></textarea>
@@ -33,28 +33,34 @@ defineProps({
 });
 
 let initialHeight = 0;
+const label = ref<HTMLLabelElement>();
 const textArea = ref<HTMLTextAreaElement>();
 onMounted(() => {
-  initialHeight = textArea.value?.offsetHeight ?? 0;
-  console.log(initialHeight);
+  initialHeight = label.value?.offsetHeight ?? 0;
+  if (textArea.value) textArea.value.style.height = `${initialHeight}px`;
 });
 
 const emit = defineEmits<{
   (e: "textToSearch", textToSearch: string): void;
 }>();
 
-const textAreaAdjust = (event: Event): void => {
-  const textArea = event.target as HTMLTextAreaElement;
-  const scrollHeight = textArea.scrollHeight;
+const makeAdjustment = (height: number): void => {
+  if (label.value && textArea.value) {
+    label.value.style.height = `${height}px`;
+    textArea.value.style.height = `${height}px`;
+  }
+};
 
-  if (!textArea.value) {
-    (event.target as HTMLTextAreaElement).style.height = `${initialHeight}px`;
+const textAreaAdjust = (): void => {
+  if (!textArea.value) return;
+
+  const scrollHeight = textArea.value.scrollHeight;
+  if (!textArea.value.value) {
+    makeAdjustment(initialHeight);
     return;
   }
 
-  (event.target as HTMLTextAreaElement).style.height = `${
-    scrollHeight > initialHeight ? scrollHeight : initialHeight
-  }px`;
+  makeAdjustment(scrollHeight > initialHeight ? scrollHeight : initialHeight);
 };
 
 const typedText = ref<string>("");
@@ -66,9 +72,9 @@ const emitTextToSearch = (): void => {
 </script>
 <style scoped>
 .input-search {
-  @apply font-normal text-base bg-transparent w-full border-2 border-[#5F5F5F] text-white resize-none h-[60px];
+  @apply font-normal text-base bg-transparent w-full border-2 border-[#5F5F5F] text-white resize-none;
 
-  @apply rounded-xl py-4 px-14 outline-none placeholder:text-[#787676] transition duration-150 overflow-hidden border;
+  @apply rounded-xl py-4 px-14 outline-none placeholder:text-[#787676] transition duration-150 border overflow-hidden;
 }
 
 .input-search::-webkit-scrollbar {

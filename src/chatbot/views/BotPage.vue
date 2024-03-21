@@ -13,6 +13,7 @@
     <SearchBox
       placeholder="Ask question to WibrBot"
       @textToSearch="makeSearch"
+      class="h-14"
     />
   </section>
 </template>
