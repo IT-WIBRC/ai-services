@@ -1,6 +1,6 @@
 <template>
-  <section class="h-screen flex flex-col justify-end mx-10 pb-4">
-    <div class="h-full space-y-5 scroll pl-2 pr-1.5 py-2">
+  <section class="h-screen flex flex-col mx-10 pb-4">
+    <div class="space-y-5 scroll pl-2 pr-1.5 py-2">
       <div
         v-for="(search, index) in getUserSearches"
         :key="index"
@@ -13,7 +13,6 @@
     <SearchBox
       placeholder="Ask question to WibrBot"
       @textToSearch="makeSearch"
-      class="min-h-14"
     />
   </section>
 </template>
