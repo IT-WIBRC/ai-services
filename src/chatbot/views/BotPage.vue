@@ -1,110 +1,46 @@
 <template>
-  <section class="h-screen flex flex-col mx-10 pb-4">
-    <div class="space-y-5 scroll pl-2 pr-1.5 py-2">
-      <div
-        v-for="(search, index) in getUserSearches"
-        :key="index"
-        class="flex"
-        :class="{ 'justify-end': search.author === 'SYSTEM' }"
-      >
-        <MessageCard v-bind="search" class="max-w-[75%] shadow-sm" />
-      </div>
+  <section class="h-screen flex flex-col mx-10 pb-4 scroll-smooth">
+    <div
+      class="h-full flex flex-col justify-end gap-y-5 scroll pl-2 pr-1.5 py-5"
+    >
+      <WelcomeCard class="w-full animate-welcome" />
+      <TransitionGroup name="list">
+        <div v-for="(search, index) in userSearches" :key="index">
+          <MessageCard
+            v-bind="search"
+            :class="[
+              'w-full',
+              search.author === 'ME' ? 'bg-gray-550' : 'bg-black-750',
+            ]"
+          />
+        </div>
+      </TransitionGroup>
     </div>
     <SearchBox
       placeholder="Ask question to WibrBot"
       @textToSearch="makeSearch"
-      class="h-14"
+      class="h-14 animate-search"
     />
   </section>
 </template>
 <script setup lang="ts">
-import { computed, reactive } from "vue";
+import { reactive } from "vue";
 import SearchBox from "@/chatbot/components/inputs/SearchBox.vue";
 import MessageCard, {
-  MESSAGE_THEME,
+  AUTHOR,
 } from "@/chatbot/components/cards/MessageCard.vue";
+import WelcomeCard from "@/chatbot/components/cards/WelcomeCard.vue";
 
 type Search = {
-  author: "USER" | "SYSTEM";
+  author: AUTHOR;
   message: string;
 };
 
-type DisplayedSearch = Search & {
-  class: string;
-  theme: keyof typeof MESSAGE_THEME;
-};
-
-const userSearches = reactive<Search[]>([
-  {
-    author: "USER",
-    message: "lorem erveveververververver",
-  },
-  {
-    author: "USER",
-    message: "lorem erveveververververver",
-  },
-  {
-    author: "SYSTEM",
-    message: "lorem erveveververververver",
-  },
-  {
-    author: "USER",
-    message: "lorem erveveververververver ",
-  },
-  {
-    author: "SYSTEM",
-    message: "lorem erveveververververver",
-  },
-  {
-    author: "USER",
-    message: "lorem erveveververververver",
-  },
-  {
-    author: "SYSTEM",
-    message: "lorem erveveververververver",
-  },
-  {
-    author: "USER",
-    message: "lorem erveveververververver",
-  },
-  {
-    author: "SYSTEM",
-    message: "lorem erveveververververver",
-  },
-  {
-    author: "USER",
-    message: "lorem erveveververververver",
-  },
-  {
-    author: "SYSTEM",
-    message: "lorem erveveververververver",
-  },
-  {
-    author: "USER",
-    message: "lorem erveveververververver",
-  },
-  {
-    author: "SYSTEM",
-    message: "lorem erveveververververver",
-  },
-]);
-
-const getUserSearches = computed<DisplayedSearch[]>(() => {
-  return userSearches.map((userSearch) => {
-    const isUser = userSearch.author === "USER";
-    return {
-      ...userSearch,
-      theme: isUser ? "BLUE_300" : "BLUE_700",
-      class: isUser
-        ? "text-blue-700 shadow-blue-300"
-        : "shadow-fuchsia-400 text-fuchsia-400",
-    };
-  });
-});
+const userSearches = reactive<Search[]>([]);
 
 const makeSearch = (textTyped: string): void => {
   userSearches.push({
-    author: "USER",
+    author: "ME",
     message: textTyped,
   });
 };
@@ -112,5 +48,49 @@ const makeSearch = (textTyped: string): void => {
 <style scoped>
 .card {
   @apply max-w-[85%];
+}
+
+.animate-welcome {
+  @apply opacity-0 transform scale-0;
+
+  animation-name: bounce-welcome;
+  animation-duration: 0.7s;
+  animation-delay: 0.4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes bounce-welcome {
+  50% {
+    @apply opacity-50;
+  }
+
+  100% {
+    @apply opacity-100 scale-100;
+  }
+}
+
+.animate-search {
+  @apply transform scale-0 translate-y-12;
+
+  animation-name: bounce-search;
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes bounce-search {
+  to {
+    @apply scale-100 translate-y-0;
+  }
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>

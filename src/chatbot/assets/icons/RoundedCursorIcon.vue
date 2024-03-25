@@ -13,9 +13,17 @@
         y2="21.7175"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#CF53AC" />
-        <stop offset="1" stop-color="#6693AC" />
+        <stop :stop-color="isActive ? '#CF53AC' : '#555555'" />
+        <stop offset="1" :stop-color="isActive ? '#6693AC' : '#555555'" />
       </linearGradient>
     </defs>
   </svg>
 </template>
+<script setup lang="ts">
+defineProps({
+  isActive: {
+    type: Boolean,
+    default: false,
+  },
+});
+</script>

@@ -1,21 +1,24 @@
 <template>
   <label class="relative block" ref="label">
-    <span class="absolute inset-y-0 left-4 flex items-center">
+    <span class="absolute bottom-[0.90rem] left-4">
       <SmileIcon class="w-7 h-7" />
     </span>
     <textarea
       :placeholder="placeholder"
       autocomplete="off"
       v-model="typedText"
-      @keyup.enter="emitTextToSearch"
-      @keyup="textAreaAdjust()"
+      @keyup="textAreaAdjust"
       class="input-search"
       ref="textArea"
     ></textarea>
-    <span class="absolute inset-y-0 right-0 pr-1.5 flex items-center">
+    <span class="absolute bottom-3.5 right-0 pr-3.5">
       <RoundedCursorIcon
-        class="h-8 w-12 cursor-pointer"
+        :class="[
+          'h-7 w-7',
+          !!typedText ? 'cursor-pointer' : 'cursor-not-allowed',
+        ]"
         @click.stop="emitTextToSearch"
+        :isActive="!!typedText"
       />
     </span>
   </label>
@@ -36,7 +39,7 @@ let initialHeight = 0;
 const label = ref<HTMLLabelElement>();
 const textArea = ref<HTMLTextAreaElement>();
 onMounted(() => {
-  initialHeight = label.value?.offsetHeight ?? 0;
+  initialHeight = label.value?.offsetHeight || 0;
   if (textArea.value) textArea.value.style.height = `${initialHeight}px`;
 });
 
@@ -68,6 +71,7 @@ const emitTextToSearch = (): void => {
   if (!typedText.value) return;
   emit("textToSearch", typedText.value);
   typedText.value = "";
+  makeAdjustment(initialHeight);
 };
 </script>
 <style scoped>

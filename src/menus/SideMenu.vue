@@ -31,7 +31,7 @@ type CustomMenu = Menu & {
 const menus: CustomMenu[] = [
   {
     icon: "CHATBOT",
-    label: "Chatbot",
+    label: "My chats",
     path: "/",
     name: "chatbot",
   },

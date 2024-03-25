@@ -20,4 +20,11 @@
   .scroll::-webkit-scrollbar-track {
     @apply bg-transparent;
   }
+
+  .text-gradient {
+    background: linear-gradient(92deg, #EC81EE 59.01%, rgba(151, 102, 255, 0.00) 101.13%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }

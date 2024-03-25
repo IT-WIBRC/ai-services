@@ -43,7 +43,7 @@ describe("SideMenu", () => {
     [
       {
         icon: "CHATBOT",
-        label: "Chatbot",
+        label: "My chats",
         path: "/",
         isActive: false,
       },
@@ -60,7 +60,7 @@ describe("SideMenu", () => {
     [
       {
         icon: "CHATBOT",
-        label: "Chatbot",
+        label: "My chats",
         path: "/",
         isActive: true,
       },

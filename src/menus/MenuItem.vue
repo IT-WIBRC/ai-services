@@ -8,7 +8,7 @@
       ]"
     />
     <RouterLink
-      :class="['text-xl font-semibold', { 'text-[#949AE6]': isActive }]"
+      :class="['text-lg font-semibold', { 'text-[#949AE6]': isActive }]"
       :to="path"
     >
       {{ label }}
