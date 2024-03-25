@@ -5,12 +5,12 @@
     >
       <WelcomeCard class="w-full animate-welcome" />
       <TransitionGroup name="list">
-        <div v-for="(search, index) in userSearches" :key="index">
+        <div v-for="(search, index) in getUserChatCompletions" :key="index">
           <MessageCard
             v-bind="search"
             :class="[
               'w-full',
-              search.author === 'ME' ? 'bg-gray-550' : 'bg-black-750',
+              search.author === 'SYSTEM' ? 'bg-black-750' : 'bg-gray-550',
             ]"
           />
         </div>
@@ -24,25 +24,20 @@
   </section>
 </template>
 <script setup lang="ts">
-import { reactive } from "vue";
 import SearchBox from "@/chatbot/components/inputs/SearchBox.vue";
-import MessageCard, {
-  AUTHOR,
-} from "@/chatbot/components/cards/MessageCard.vue";
+import MessageCard from "@/chatbot/components/cards/MessageCard.vue";
 import WelcomeCard from "@/chatbot/components/cards/WelcomeCard.vue";
+import { useChatbotStore } from "../../infra/store/chatBot";
 
-type Search = {
-  author: AUTHOR;
-  message: string;
-};
+const {
+  getUserChatCompletions,
+  sendUserMessageForCompletion,
+  setUserChatCompletion,
+} = useChatbotStore();
 
-const userSearches = reactive<Search[]>([]);
-
-const makeSearch = (textTyped: string): void => {
-  userSearches.push({
-    author: "ME",
-    message: textTyped,
-  });
+const makeSearch = async (textTyped: string): Promise<void> => {
+  setUserChatCompletion(textTyped);
+  await sendUserMessageForCompletion();
 };
 </script>
 <style scoped>

@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { VueWrapper, mount } from "@vue/test-utils";
 import SearchBox from "@/chatbot/components/inputs/SearchBox.vue";
 import SmileIcon from "@/chatbot/assets/icons/SmileIcon.vue";
